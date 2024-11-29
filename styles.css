@@ -19,6 +19,7 @@ body {
 
 .error {
   background-color: red;
+  color: white;
 }
 
 .elemento-lista {

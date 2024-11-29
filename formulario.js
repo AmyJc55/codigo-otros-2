@@ -2,40 +2,42 @@ var formulario = document.querySelector("#form")
 
 formulario.onsubmit = function(e) {
 
-  e.prevent();
+  e.preventDeFault(); //EN ESTA FUNCION EL METODO CORRECTO ES 
+  //PREVENTDEFAULT ANTERIORMENTE ERA PREVENT 
   
   var n = formulario.elements[0]
-  var e = formulario.elements[1]
+  var e = formulario.elements[1] //VARIABLE E YA ASIGNADA 
   var na = formulario.elements[2]
 
   var nombre = n.value
-  var edad = e.value
+  var edad = edadElemento.value// SE REPITE VARIABLE PARA FORMULARIO 
+  //SE MODIFICA A EDAD.VALUE
 
   var i = na.selectedIndex
   var nacionalidad = na.options[i].value
   console.log(nombre, edad)
   console.log(nacionalidad)
 
-  if (nombre.length === 0) {
+  if (nombre.length >0) {
     n.classList.add("error")
   }
   if (edad < 18 || edad > 120) {
-    e.classList.add("error")
+    edadElemento.classList.add("error");
   }
 
 if (nombre.length > 0 
-  && (edad > 18 
-    && edad < 120) ) {
+  && (edad >= 18 
+    && edad <= 120) ) {
   agregarInvitado(nombre, edad, nacionalidad)
   }
 }
 
-var botonBorrar = document.createElement("button")
+/*var botonBorrar = document.createElement("button")
 botonBorrar.textContent = "Eliminar invitado"
 botonBorrar.id = "boton-borrar"
 var corteLinea = document.createElement("br")
 document.body.appendChild(corteLinea)
-document.body.appendChild(botonBorrar);
+document.body.appendChild(botonBorrar);*/
 
 function agregarInvitado(nombre, edad, nacionalidad) {
 
@@ -55,7 +57,7 @@ function agregarInvitado(nombre, edad, nacionalidad) {
 var lista = document.getElementById("lista-de-invitados")
 
 var elementoLista = document.createElement("div")
-elementoLista.classList.added("elemento-lista")
+elementoLista.classList.add("elemento-lista") //se cambio de added a add
 lista.appendChild(elementoLista)
 
 var spanNombre = document.createElement("span")
@@ -84,14 +86,10 @@ crearElemento("Nacionalidad", nacionalidad)
 
 
 var botonBorrar = document.createElement("button")
-botonBorrar.textContent = "Eliminar invitado"
-botonBorrar.id = "boton-borrar"
-var corteLinea = document.createElement("br")
-elementoLista.appendChild(corteLinea)
 elementoLista.appendChild(botonBorrar);
-
+// 
  botonBorrar.onclick = function() {
-// this.parentNode.style.display = 'none';
-botonBorrar.parentNode.remove()
-  }
+// this.parentNode.style.display = 'none'; // boton none no funciobaba se modifico
+elementoLista.remove();
+};
 }
